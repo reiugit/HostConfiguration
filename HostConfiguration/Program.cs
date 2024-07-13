@@ -4,21 +4,21 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using ConfigurationsInConsoleApp;
 
-var host = Host.CreateApplicationBuilder();
+var builder = Host.CreateApplicationBuilder();
 
-host.Services.Configure<Settings>(host.Configuration.GetSection("Settings"));
+builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
 
-var app = host.Build();
+var host = builder.Build();
 
 // 1.) Reading the value of a setting via IConfiguration
-var setting1 = app.Services
+var setting1 = host.Services
     .GetRequiredService<IConfiguration>()
     .GetSection("Settings")
     .Get<Settings>()?
     .SettingKey1;
 
 // 2.) Reading the value of a setting via IOptions
-var setting2 = app.Services
+var setting2 = host.Services
     .GetRequiredService<IOptions<Settings>>()
     .Value
     .SettingKey2;
@@ -28,4 +28,4 @@ Console.WriteLine($"\ninfo: Reading settings before host startup.");
 Console.WriteLine($"      Setting 1: '{setting1}'");
 Console.WriteLine($"      Setting 2: '{setting2}'\n");
 
-await app.RunAsync();
+await host.RunAsync();
