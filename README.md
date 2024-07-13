@@ -2,6 +2,6 @@
 
 1. Building the Host with Host.CreateApplicationBuilder.Build()
 2. Reading configuration values before starting the Host
-  * via IConfiguration
-  * via IOptions
+   * via IConfiguration
+   * via IOptions
 3. Starting the host
