@@ -6,14 +6,14 @@ using ConfigurationsInConsoleApp;
 
 var builder = Host.CreateApplicationBuilder();
 
-builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
+builder.Services.Configure<Settings>(builder.Configuration.GetSection(nameof(Settings)));
 
 var host = builder.Build();
 
 // 1.) Reading the value of a setting via IConfiguration
 var setting1 = host.Services
     .GetRequiredService<IConfiguration>()
-    .GetSection("Settings")
+    .GetSection(nameof(Settings))
     .Get<Settings>()?
     .SettingKey1;
 
